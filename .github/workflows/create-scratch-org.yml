@@ -69,7 +69,7 @@ jobs:
           wait: 10
       - name: Package Installation
         if: ${{ inputs.install-packages }}
-        uses: svierk/sfdx-package-installation@main
+        uses: svierk/sfdx-package-installation@feature/support-for-installation-keys
         with:
           packages: ${{ inputs.packages }}
           wait: 30
