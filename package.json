@@ -1,0 +1,60 @@
+{
+  "name": "salesforce-app",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Salesforce App",
+  "author": {
+    "name": "Sebastiano Schwarz",
+    "url": "https://github.com/svierk"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": "20.x.x",
+    "npm": "10.x.x"
+  },
+  "scripts": {
+    "lint": "eslint **/lwc/**/*.js",
+    "lint:sonar": "eslint -f json -o eslint-report.json **/lwc/**/*.js",
+    "test": "npm run test:unit",
+    "test:unit": "sfdx-lwc-jest --skipApiVersionCheck",
+    "test:unit:watch": "sfdx-lwc-jest --watch --skipApiVersionCheck",
+    "test:unit:debug": "sfdx-lwc-jest --debug --skipApiVersionCheck",
+    "test:unit:coverage": "sfdx-lwc-jest --coverage --skipApiVersionCheck",
+    "prettier": "prettier --write \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\" --check",
+    "prettier:verify": "prettier --list-different \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
+    "postinstall": "husky install",
+    "precommit": "lint-staged",
+    "server:lwc": "sf force lightning lwc start"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.0",
+    "@babel/eslint-parser": "^7.23.10",
+    "@locker/eslint-config-locker": "^0.21.3",
+    "@lwc/eslint-plugin-lwc": "^1.7.2",
+    "@prettier/plugin-xml": "^3.3.1",
+    "@sa11y/jest": "^6.6.0",
+    "@salesforce/eslint-config-lwc": "^3.5.3",
+    "@salesforce/eslint-plugin-aura": "^2.1.0",
+    "@salesforce/eslint-plugin-lightning": "^1.0.0",
+    "@salesforce/sfdx-lwc-jest": "^4.0.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-compat": "^4.2.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jest": "^27.9.0",
+    "husky": "^9.0.11",
+    "jest-junit": "^16.0.0",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
+    "prettier-plugin-apex": "^2.1.0",
+    "typescript": "~5.3.3"
+  },
+  "lint-staged": {
+    "**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}": [
+      "prettier --write --check"
+    ],
+    "**/lwc/**/*.{css,html,js}": [
+      "eslint",
+      "sfdx-lwc-jest --skipApiVersionCheck -- --passWithNoTests"
+    ]
+  }
+}

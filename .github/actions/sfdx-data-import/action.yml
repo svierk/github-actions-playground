@@ -1,0 +1,58 @@
+name: 'SFDX Data Import'
+description: 'Salesforce import action for uploading records based on CSV (Bulk API 2.0) or JSON (sObject Tree) format.'
+
+inputs:
+  file-path:
+    description: >
+      Path to CSV or JSON files that contain the data to be uploaded.
+      CSV (Bulk API 2.0) only supports a single file.
+      JSON (sObject Tree) supports one or multiple files, comma-separated and in-order that contain the records.
+    required: true
+  object-type:
+    description: >
+      API name of the Salesforce object, either standard or custom, that you want to update or delete records from.
+      Only required for CSV file based upload using Bulk API 2.0.
+    required: false
+  external-id:
+    description: >
+      Name of the external ID field, or the Id field.
+      Only required for CSV file based upload using Bulk API 2.0.
+    required: false
+    default: Id
+  target-org:
+    description: Username or alias of the target org. Not required if default org is already set.
+    required: false
+  api-version:
+    description: Override the api version used for api requests made by this action, for example '59.0'.
+    required: false
+
+runs:
+  using: composite
+  steps:
+    - name: Data Import
+      shell: bash
+      run: |
+        filepath=${{ inputs.file-path }}
+        filename_with_ext=$(basename "$filepath")
+        extension="${filename_with_ext##*.}"
+        args=()
+
+        if [[ -n "${{ inputs.target-org }}" ]]; then
+          args+=(--target-org "${{ inputs.target-org }}")
+        fi
+
+        if [[ -n "${{ inputs.api-version }}" ]]; then
+          args+=(--api-version "${{ inputs.api-version }}")
+        fi
+
+        if [[ "$extension" == "csv" ]] && [[ -n "${{ inputs.object-type }}" ]] && [[ -n "${{ inputs.external-id }}" ]]; then
+          args+=(--sobject ${{ inputs.object-type }})
+          args+=(--external-id ${{ inputs.external-id }})
+          echo sf data upsert bulk --file ${{ inputs.file-path }} "${args[@]}"
+          sf data upsert bulk --file ${{ inputs.file-path }} "${args[@]}"
+        fi
+
+        if [[ "$extension" == "json" ]]; then
+          echo sf data import tree --files ${{ inputs.file-path }} "${args[@]}"
+          sf data import tree --files ${{ inputs.file-path }} "${args[@]}"
+        fi
