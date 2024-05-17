@@ -27,7 +27,7 @@ on:
       packages:
         description: Packages to be installed
         type: string
-        default: "['04t2p000000fYHKAA2_VWCCT2019','04t6S000001UjutQAC']"
+        default: "['04t6S000000ccHVQAY','04t2p000000fYHKAA2_VWCCT2019','04t61000000gWo1AAE']"
       push-data:
         description: Should Test Data be pushed?
         type: boolean
