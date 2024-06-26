@@ -28,6 +28,15 @@ jobs:
         run: npm run test:unit:coverage
       - name: Install SF CLI
         uses: svierk/sfdx-cli-setup@main
+        with:
+          plugins: "['@salesforce/sfdx-scanner@latest']"
+      - name: Run Salesforce Code Analyzer
+        id: run-code-analyzer
+        uses: forcedotcom/run-code-analyzer@v1
+        with:
+          run-command: run
+          run-arguments: --normalize-severity --target . --outfile results.html
+          results-artifact-name: salesforce-code-analyzer-results
       - name: Salesforce Org Login
         uses: svierk/sfdx-login@main
         with:
@@ -38,12 +47,3 @@ jobs:
         run: sf project deploy start
       - name: Apex Unit Tests
         run: sf apex run test --test-level=RunLocalTests --code-coverage --result-format=human -w 30 -d ./tests/apex --detailed-coverage
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      - name: Codecov Coverage Upload
-        uses: codecov/codecov-action@main
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
