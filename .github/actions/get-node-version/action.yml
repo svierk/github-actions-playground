@@ -16,6 +16,7 @@ runs:
         echo "$(cat ${{ inputs.path }})" | jq .engines.node | xargs -I {} echo "NodeVersion="{} >> $GITHUB_ENV
     - name: Use Node.js ${{ env.NodeVersion }}
       uses: actions/setup-node@main
+      working-directory: test
       with:
         node-version: ${{ env.NodeVersion }}
         cache: 'npm'
