@@ -48,6 +48,8 @@ jobs:
           fetch-depth: 0
       - name: Select Node Version
         uses: svierk/get-node-version@main
+        with:
+          path: './test/'
       - name: Install SF CLI
         uses: svierk/sfdx-cli-setup@main
       - name: Authorize DevHub
