@@ -32,6 +32,10 @@ on:
         description: Should Test Data be pushed?
         type: boolean
         default: true
+      delete-org:
+        description: Should the Scratch Org be deleted again?
+        type: boolean
+        default: false
 
 jobs:
   create-scratch-org:
@@ -91,3 +95,8 @@ jobs:
           file-path: './data/accounts.json,./data/contacts.json'
       - name: Generate Password
         run: sf org generate password --target-org scratch-${{ github.run_id }}
+      - name: Delete Scratch Org
+        if: ${{ inputs.delete-org }}
+        uses: svierk/sfdx-delete-scratch-org@main
+        with:
+          target-org: scratch-${{ github.run_id }}
