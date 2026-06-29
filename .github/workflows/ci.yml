@@ -28,7 +28,7 @@ jobs:
         with:
           path: "./test/"
       - name: Install Dependencies
-        run: npm ci
+        run: npm install --ignore-scripts
       - name: Check Prettier
         run: npm run prettier
       - name: Check ESLint
