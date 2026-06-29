@@ -16,15 +16,8 @@ jobs:
         uses: actions/checkout@main
         with:
           fetch-depth: 0
-      - name: Use Node.js
-        uses: actions/setup-node@main
-        with:
-          node-version-file: './test/package.json'
-          node-version: ${{ env.NodeVersion }}
-          cache: 'npm'
-          cache-dependency-path: './test/package-lock.json'
       - name: Select Node Version
-        uses: ./.github/actions/get-node-version
+        uses: svierk/get-node-version@main
       - name: Install Dependencies
         run: npm install --ignore-scripts
       - name: Check Prettier
