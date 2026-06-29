@@ -19,14 +19,14 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@main
         with:
-          node-version-file: './test/package.json'
+          node-version-file: "./test/package.json"
           node-version: ${{ env.NodeVersion }}
-          cache: 'npm'
-          cache-dependency-path: './test/package-lock.json'
+          cache: "npm"
+          cache-dependency-path: "./test/package-lock.json"
       - name: Select Node Version
         uses: ./.github/actions/get-node-version
         with:
-          path: './test/'
+          path: "./test/"
       - name: Install Dependencies
         run: npm ci
       - name: Check Prettier
@@ -39,6 +39,7 @@ jobs:
         uses: svierk/sfdx-cli-setup@main
         with:
           plugins: "['@salesforce/sfdx-scanner@latest']"
+          version: 2.142.4
       - name: Run Salesforce Code Analyzer
         id: run-code-analyzer
         uses: forcedotcom/run-code-analyzer@v1
