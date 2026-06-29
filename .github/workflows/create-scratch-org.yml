@@ -62,15 +62,6 @@ jobs:
           set-default: true
           set-default-dev-hub: true
           alias: devhub
-      - name: Debug Create Scratch Org
-        run: |
-          sf version
-          sf org list --json | jq '.'
-          sf org create scratch --json \
-            --definition-file config/project-scratch-def.json \
-            --target-dev-hub devhub \
-            --alias debug-${{ github.run_id }} \
-            --duration-days 1 | jq '.'
       - name: Create Scratch Org
         uses: svierk/sfdx-create-scratch-org@main
         with:
