@@ -19,14 +19,12 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@main
         with:
-          node-version-file: "./test/package.json"
+          node-version-file: './test/package.json'
           node-version: ${{ env.NodeVersion }}
-          cache: "npm"
-          cache-dependency-path: "./test/package-lock.json"
+          cache: 'npm'
+          cache-dependency-path: './test/package-lock.json'
       - name: Select Node Version
         uses: ./.github/actions/get-node-version
-        with:
-          path: "./test/"
       - name: Install Dependencies
         run: npm install --ignore-scripts
       - name: Check Prettier

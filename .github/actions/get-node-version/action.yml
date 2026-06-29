@@ -2,7 +2,7 @@ name: 'Get Node Version'
 description: 'Pulls the Node.js version to be used from the package.json file of a project.'
 
 inputs:
-  path: 
+  path:
     description: 'Specify the path where the package.json file can be found.'
     required: false
     default: './test/'
