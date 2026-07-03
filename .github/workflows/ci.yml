@@ -44,6 +44,6 @@ jobs:
           jwt-secret-key: ${{ secrets.SFDX_JWT_SECRET_KEY }}
           username: ${{ vars.SFDX_USERNAME }}
       - name: Deploy Metadata
-        run: sf project deploy start
+        uses: svierk/sfdx-deploy@main
       - name: Apex Unit Tests
         run: sf apex run test --test-level=RunLocalTests --code-coverage --result-format=human -w 30 -d ./tests/apex --detailed-coverage
