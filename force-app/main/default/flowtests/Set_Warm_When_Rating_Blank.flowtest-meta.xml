@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<FlowTest xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Verifies that a newly created Account without a Rating gets the default Rating "Warm".</description>
+    <flowApiName>Account_Set_Default_Rating</flowApiName>
+    <label>Set Warm When Rating Blank</label>
+    <testType>WithAssertion</testType>
+    <testPoints>
+        <elementApiName>Start</elementApiName>
+        <parameters>
+            <leftValueReference>$Record</leftValueReference>
+            <type>InputTriggeringRecordInitial</type>
+            <value>
+                <sobjectValue>{&quot;Name&quot;:&quot;Test Account&quot;}</sobjectValue>
+            </value>
+        </parameters>
+    </testPoints>
+    <testPoints>
+        <elementApiName>Finish</elementApiName>
+        <assertions>
+            <conditions>
+                <leftValueReference>$Record.Rating</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Warm</stringValue>
+                </rightValue>
+            </conditions>
+            <errorMessage
+      >Rating should have been defaulted to "Warm" for an Account created without a Rating.</errorMessage>
+        </assertions>
+    </testPoints>
+</FlowTest>
