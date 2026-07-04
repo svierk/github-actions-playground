@@ -45,7 +45,5 @@ jobs:
           username: ${{ vars.SFDX_USERNAME }}
       - name: Deploy Metadata
         uses: svierk/sfdx-deploy@main
-        with:
-          dry-run: true
       - name: Apex Unit Tests
         run: sf apex run test --test-level=RunLocalTests --code-coverage --result-format=human -w 30 -d ./tests/apex --detailed-coverage
