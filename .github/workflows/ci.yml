@@ -43,8 +43,6 @@ jobs:
           username: ${{ vars.SFDX_USERNAME }}
       - name: Deploy Metadata
         uses: svierk/sfdx-deploy@main
-      - name: Debug Flow Tests
-        run: sf flow run test --test-level RunLocalTests --target-org ${{ vars.SFDX_USERNAME }} --result-format human --json || true
       - name: Run Apex, LWC and Flow Tests
         uses: svierk/sfdx-run-tests@main
         with:
