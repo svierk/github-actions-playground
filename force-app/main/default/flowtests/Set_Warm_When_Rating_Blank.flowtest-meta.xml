@@ -3,7 +3,6 @@
     <description>Verifies that a newly created Account without a Rating gets the default Rating "Warm".</description>
     <flowApiName>Account_Set_Default_Rating</flowApiName>
     <label>Set Warm When Rating Blank</label>
-    <testType>WithAssertion</testType>
     <testPoints>
         <elementApiName>Start</elementApiName>
         <parameters>
@@ -15,7 +14,6 @@
         </parameters>
     </testPoints>
     <testPoints>
-        <elementApiName>Finish</elementApiName>
         <assertions>
             <conditions>
                 <leftValueReference>$Record.Rating</leftValueReference>
@@ -27,5 +25,6 @@
             <errorMessage
       >Rating should have been defaulted to "Warm" for an Account created without a Rating.</errorMessage>
         </assertions>
+        <elementApiName>Finish</elementApiName>
     </testPoints>
 </FlowTest>

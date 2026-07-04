@@ -4,7 +4,6 @@
   >Verifies that an Account created with an existing Rating keeps that Rating instead of being overwritten.</description>
     <flowApiName>Account_Set_Default_Rating</flowApiName>
     <label>Keep Existing Rating</label>
-    <testType>WithAssertion</testType>
     <testPoints>
         <elementApiName>Start</elementApiName>
         <parameters>
@@ -17,7 +16,6 @@
         </parameters>
     </testPoints>
     <testPoints>
-        <elementApiName>Finish</elementApiName>
         <assertions>
             <conditions>
                 <leftValueReference>$Record.Rating</leftValueReference>
@@ -28,5 +26,6 @@
             </conditions>
             <errorMessage>Rating should remain "Hot" and must not be overwritten with the default value.</errorMessage>
         </assertions>
+        <elementApiName>Finish</elementApiName>
     </testPoints>
 </FlowTest>
