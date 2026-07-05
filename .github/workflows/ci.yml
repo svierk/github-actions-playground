@@ -30,6 +30,7 @@ jobs:
           prettier: true
           eslint: true
           workspace: force-app
+          config-file: code-analyzer.yml
           prettier-command: npm run prettier
           eslint-command: npm run lint:sonar
       - name: Salesforce Org Login

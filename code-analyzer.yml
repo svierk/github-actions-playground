@@ -1,0 +1,7 @@
+# Salesforce Code Analyzer configuration
+# Applies this project's ESLint config inside the Code Analyzer's bundled ESLint engine,
+# so its findings match the standalone ESLint check (eslint: true) and the Sonar report,
+# instead of the engine falling back to its own base rules.
+engines:
+  eslint:
+    eslint_config_file: eslint.config.js
