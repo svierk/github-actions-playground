@@ -20,21 +20,18 @@ jobs:
         uses: svierk/get-node-version@main
       - name: Install Dependencies
         run: npm install --ignore-scripts
-      - name: Check Prettier
-        run: npm run prettier
-      - name: Check ESLint
-        run: npm run lint:sonar
       - name: Install SF CLI
         uses: svierk/sfdx-cli-setup@main
+      - name: Code Review
+        id: code-review
+        uses: svierk/sfdx-code-review@main
         with:
-          plugins: "['@salesforce/sfdx-scanner@latest']"
-      - name: Run Salesforce Code Analyzer
-        id: run-code-analyzer
-        uses: forcedotcom/run-code-analyzer@v1
-        with:
-          run-command: run
-          run-arguments: --normalize-severity --target . --outfile results.html
-          results-artifact-name: salesforce-code-analyzer-results
+          code-analyzer: true
+          prettier: true
+          eslint: true
+          workspace: force-app
+          prettier-command: npm run prettier
+          eslint-command: npm run lint:sonar
       - name: Salesforce Org Login
         uses: svierk/sfdx-login@main
         with:
