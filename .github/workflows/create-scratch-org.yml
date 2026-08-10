@@ -38,6 +38,9 @@ on:
         type: boolean
         default: false
 
+permissions:
+  contents: read
+
 jobs:
   create-scratch-org:
     name: Create Scratch Org
